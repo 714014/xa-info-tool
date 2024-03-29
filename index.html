@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>XA Info Tool</title>
+        <meta name="description" content="PDC and Info for XA Controllers">
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>XA INFO TOOL</h1>
+        </div>
+        <div class="tool" id="pdc-tool">
+            <h1></h1>
+            <label for="traffic">
+                Select a flight:
+            </label>
+            <select name="traffic" id="traffic">
+                <option value="flight1">FLI001</option>
+                <option value="flight2">FLI002</option>
+                <option value="flight3">FLI003</option>
+                <option value="flight4">FLI004</option>
+            </select>
+            
+            <div class="details" id="details">
+                <p id="callsign">FLI001</p> | <a href="">KLAX</a> | <a href="">KATL</a>
+            </div>
+            <div class="route" id="route">
+                <!-- INJECT CODE HERE AND REPLACE ROUTE PLAIN TEXT BELOW -->
+                LUBET2Z LUBET T934 TOKMA L602 TASMI UL602 ALPET L718 DEBNI DCT SEVKU L718 KABAN UL718 ULSAB UG8 MARTI/N0474F400 UG8 YAA UG12 GOLDO UN79 PINDO DCT GOKEL DCT LUNAR DCT ROTUN DCT TURMO DCT POKAV DCT SUKUN DCT IDEPA DCT KOLUS/N0478F400 DCT MINKA DCT EPIKU DCT GINOX DCT KIFMI DCT ELVOP DCT MUREN/N0476F390 M601 BCN N975 CCS DCT IDBID
+            </div>
+            <hr>
+            <div class="row">
+                <div class="column">
+                    <label for="destination">
+                    Destination:
+                    </label>
+                    <input type="text" name="destination" id="destination">
+                    <label for="departure">
+                        Departure:
+                    </label>
+                    <input type="text" name="departure" id="departure">
+                    <label for="trans">
+                        Transition:
+                    </label>
+                    <input type="text" name="trans" id="trans">
+                </div>
+                <div class="column">
+                    <label for="via" id="via">
+                        Climb via SID:
+                    </label>
+                    <input type="checkbox" name="via2" id="via2">
+                     <label for="maintain">
+                        Maintain:
+                    </label>
+                    <input type="text" name="maintain" id="maintain">
+                    <label for="altitude">
+                        Final Altitude:
+                    </label>
+                    <input type="text" name="altitude" id="altitude">
+                </div>
+                <div class="column">
+                    <label for="fl-time">
+                        FL Time:
+                    </label>
+                    <input type="text" name="fl-time" id="fl-time">
+                     <label for="freq">
+                        Departure Frequency:
+                    </label>
+                    <input type="text" name="freq" id="freq">
+                     <label for="squawk">
+                        Squawk:
+                    </label>
+                    <input type="text" name="squawk" id="squawk">
+                </div>
+            </div>
+            <hr>
+            <div class="row" id="">
+                <p id="result"></p>
+            </div>
+              <div class="row">
+                <button id="copy">
+                    Copy
+                </button>
+            </div>
+        </div>
+        <script type="text/javascript">
+            
+            document.getElementById('destination').addEventListener('input', updateClearance);
+            document.getElementById('departure').addEventListener('input', updateClearance);
+            document.getElementById('trans').addEventListener('input', updateClearance);
+            document.getElementById('maintain').addEventListener('input', updateClearance);
+            document.getElementById('altitude').addEventListener('input', updateClearance);
+            document.getElementById('fl-time').addEventListener('input', updateClearance);
+            document.getElementById('freq').addEventListener('input', updateClearance);
+            document.getElementById('squawk').addEventListener('input', updateClearance);
+            document.getElementById('via2').addEventListener('input', updateClearance);
+            
+//            function validateCheckbox(){
+//                var viaCheckbox = document.getElementById('via2')
+//                if (viaCheckbox.checked) {
+//                    console.log('The checkbox is checked');
+//                } else {
+//                    console.log('The checkbox is not checked');
+//                }
+//            }
+            
+            function updateClearance() {
+                var destination = document.getElementById('destination').value;
+                var departure = document.getElementById('departure').value;
+                var trans = document.getElementById('trans').value;
+                var maintain = document.getElementById('maintain').value;
+                var altitude = document.getElementById('altitude').value;
+                var flTime = document.getElementById('fl-time').value;
+                var freq = document.getElementById('freq').value;
+                var squawk = document.getElementById('squawk').value;
+                var viaCheckbox = document.getElementById('via2')
+                
+                if (viaCheckbox.checked) {
+                    var clearance = `Cleared to ${destination} via the ${departure} departure, ${trans} transition, then as filed. Climb via SID. Expect FL${altitude} ${flTime} minutes after departure. Departure frequency ${freq}. Squawk ${squawk}.`;
+                    console.log("Checkbox");
+                 } else {
+                    var clearance = `Cleared to ${destination} via the ${departure} departure, ${trans} transition, then as filed. Maintain ${maintain}. Expect FL${altitude} ${flTime} minutes after departure. Departure frequency ${freq}. Squawk ${squawk}.`;
+                 }
+                 document.getElementById('result').textContent = `${clearance}`;
+            }
+            
+            
+            const paragraph = document.getElementById('result')
+            const copyButton = document.getElementById('copy')
+            const copyTextToClipboard = async (text) => {
+                try {
+                    await navigator.clipboard.writeText(text)
+
+                    console.log('Text copied to clipboard successfully!')
+                } catch (error) {
+                    console.error('Failed to copy text:', error)
+                }
+            }
+            copyButton.addEventListener('click', () => {
+                const textToCopy = paragraph.innerText
+                copyTextToClipboard(textToCopy)
+            })
+        </script>
+</body>
+</html>

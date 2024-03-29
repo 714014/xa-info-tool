@@ -1,0 +1,147 @@
+html {
+    background: #e6e9e9;
+    background-image: linear-gradient(270deg, rgb(230, 233, 233) 0%, rgb(216, 221, 221) 100%);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);
+    color: #545454;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 2em 2em 4em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #222;
+    font-weight: 600;
+    line-height: 1;
+}
+
+h1 {
+    text-align: center;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin: 20px;
+}
+
+h2 {
+    margin-top: 1.3em;
+}
+
+a {
+    color: #0083e8;
+}
+
+div.header{
+    background-color: #039;
+    padding: 2px;
+    font-size: 2em
+}
+
+.column {
+float: left;
+width: 33%;
+}
+
+.row{
+    margin-bottom: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+.header h1{
+    color: white;
+}
+
+.tool label{
+    display: block;
+    margin-top: 5px;
+    font-size:20px;
+    font-weight: bold;
+}
+
+.tool button{
+    display: block;
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 2px;
+    width: 200px;
+    border-width: 3px;
+    border-color: #039;
+    border-style: solid;
+    color: #039;
+    font-weight: bold;
+    background-color: #fff;
+    cursor: pointer; 
+    
+}
+
+.tool button:hover{
+    background-color: #039;
+    color: white;
+}
+
+.tool input{
+    height: 20px;
+    width: 200px;
+    border-width: 3px;
+    border-color: #039;
+    border-style: solid;
+}
+
+.tool select{
+    height: 25px;
+    border-width: 3px;
+    border-color: #039;
+    border-style: solid;
+}
+
+#details{
+    margin-top: 20px;
+}
+
+#details p{
+    display: inline;
+}
+
+#callsign{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+input[type="checkbox"]{
+    width: 20px;
+    vertical-align: middle;
+}
+
+input[type="text"]{
+    display: block;
+}
+
+#via{
+    display: inline-block;
+}
+
+input[type="checkbox"] + label {
+    display: block;
+    width: 20px;
+    vertical-align: middle;
+}
+
+#route{
+    margin-bottom: 20px;
+}
+
+#result{
+    margin-top: 20px;
+}

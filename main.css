@@ -63,14 +63,14 @@ clear: both;
     color: white;
 }
 
-.tool label{
+label{
     display: block;
     margin-top: 5px;
     font-size:20px;
     font-weight: bold;
 }
 
-.tool button{
+button{
     display: block;
     margin-top: 10px;
     font-size: 20px;
@@ -86,12 +86,12 @@ clear: both;
     
 }
 
-.tool button:hover{
+button:hover{
     background-color: #039;
     color: white;
 }
 
-.tool input{
+input{
     height: 20px;
     width: 200px;
     border-width: 3px;
@@ -99,7 +99,16 @@ clear: both;
     border-style: solid;
 }
 
-.tool select{
+/*
+input:focus{
+    border-color: #ff5050;
+    border-radius: 0px;
+    border-style: solid;
+    border-width: 3px;
+}
+*/
+
+select{
     height: 25px;
     border-width: 3px;
     border-color: #039;

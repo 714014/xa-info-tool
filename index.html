@@ -16,11 +16,13 @@
             <label for="traffic">
                 Select a flight:
             </label>
-            <select name="traffic" id="traffic">
-                <option value="flight1">FLI001</option>
-                <option value="flight2">FLI002</option>
-                <option value="flight3">FLI003</option>
-                <option value="flight4">FLI004</option>
+            <select name="traffic" id="traffic" onchange"selectFlight(this)">
+                <option value=AAL1912>AAL1912</option>
+                <option value=ACO102>ACO102</option>
+                <option value=ACO127>ACO127</option>
+                <option value=ANZ28>ANZ28</option>
+                <option value=BEL241>BEL241</option>
+                <option value=BOV766>BOV766</option>
             </select>
             
             <div class="details" id="details">
@@ -86,8 +88,8 @@
                 </button>
             </div>
         </div>
+        
         <script type="text/javascript">
-            
             document.getElementById('destination').addEventListener('input', updateClearance);
             document.getElementById('departure').addEventListener('input', updateClearance);
             document.getElementById('trans').addEventListener('input', updateClearance);
@@ -106,6 +108,31 @@
 //                    console.log('The checkbox is not checked');
 //                }
 //            }
+            
+            function selectFlight(selectObject) {
+                const selectedValue = selectObject.value;
+                console.log("Selected flight:", selectedValue);
+
+                // Now you can make a POST request with the selected value
+                // Replace the URL below with your actual server endpoint
+                const url = "https://your-server.com/api/flights"; // Example URL
+
+                fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify({ flightNumber: selectedValue }),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Server response:", data);
+                    // Handle the response data as needed
+                })
+                .catch(error => {
+                    console.error("Error making POST request:", error);
+                });
+            }
             
             function updateClearance() {
                 var destination = document.getElementById('destination').value;

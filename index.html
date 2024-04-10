@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,17 +13,31 @@
         </div>
         <div class="tool" id="pdc-tool">
             <h1></h1>
-            <label for="traffic">
+            <label for="traffic-select">
                 Select a flight:
             </label>
-            <select name="traffic" id="traffic" onchange"selectFlight(this)">
-                <option value=AAL1912>AAL1912</option>
-                <option value=ACO102>ACO102</option>
-                <option value=ACO127>ACO127</option>
-                <option value=ANZ28>ANZ28</option>
-                <option value=BEL241>BEL241</option>
-                <option value=BOV766>BOV766</option>
-            </select>
+            
+<!--        THIS IS THE START OF THE FORM-->
+            
+            <form action"" method="POST" id="traffic-select">
+                <select name="traffic" id="traffic">
+                    <option value="null"></option>
+                    <option value=AAL1912>AAL1912</option>
+                    <option value=ACO102>ACO102</option>
+                    <option value=ACO127>ACO127</option>
+                    <option value=ANZ28>ANZ28</option>
+                    <option value=BEL241>BEL241</option>
+                    <option value=BOV766>BOV766</option>
+                     <?php 
+                        foreach ($pilots as $key => $value) {
+                            $pilot = $value['callsign'];
+                            echo "<option value=$pilot>$pilot</option>";
+                        }
+                        ?>
+                </select>
+            </form>
+            
+<!--            THIS IS THE END OF THE FORM-->
             
             <div class="details" id="details">
                 <p id="callsign">FLI001</p> | <a href="">KLAX</a> | <a href="">KATL</a>
@@ -100,22 +114,16 @@
             document.getElementById('squawk').addEventListener('input', updateClearance);
             document.getElementById('via2').addEventListener('input', updateClearance);
             
-//            function validateCheckbox(){
-//                var viaCheckbox = document.getElementById('via2')
-//                if (viaCheckbox.checked) {
-//                    console.log('The checkbox is checked');
-//                } else {
-//                    console.log('The checkbox is not checked');
-//                }
-//            }
+            const selectObject = document.getElementById("traffic");
+            const formElement = document.getElementById("traffic-select");
             
-            function selectFlight(selectObject) {
+//            THIS IS WHERE THE FORM AND SERVER REQUEST BEGIN
+
+            selectObject.addEventListener("change", function() {
                 const selectedValue = selectObject.value;
                 console.log("Selected flight:", selectedValue);
 
-                // Now you can make a POST request with the selected value
-                // Replace the URL below with your actual server endpoint
-                const url = "https://your-server.com/api/flights"; // Example URL
+                const url = "https://your-server.com/api/flights";
 
                 fetch(url, {
                     method: "POST",
@@ -131,8 +139,11 @@
                 })
                 .catch(error => {
                     console.error("Error making POST request:", error);
-                });
-            }
+                })
+                formElement.submit();
+            });
+                
+//            THIS IS WHERE THE FORM AND SERVER REQUEST END
             
             function updateClearance() {
                 var destination = document.getElementById('destination').value;
